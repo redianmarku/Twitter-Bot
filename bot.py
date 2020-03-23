@@ -13,7 +13,9 @@ nr = 500
 
 for tweet in tweepy.Cursor(api.search, search).items(nr):
     try:
+        user_id = tweet.user.id
         tweet.favorite()
+        api.create_friendship(user_id)
         print('Liked tweet == By ' + tweet.user.screen_name)
         time.sleep(5)
     except tweepy.TweepError as e:
